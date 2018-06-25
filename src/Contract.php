@@ -573,6 +573,10 @@ class Contract
                 $transaction['data'] = $functionSignature . Utils::stripZero($data);
             }
 
+            if (empty($transaction['to'])) {
+                unset($transaction['to']);
+            }
+
             $this->eth->estimateGas($transaction, function ($err, $gas) use ($callback){
                 if ($err !== null) {
                     return call_user_func($callback, $err, null);
